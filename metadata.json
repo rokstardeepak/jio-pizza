@@ -1,0 +1,6 @@
+{
+  "name": "Jio Pizza",
+  "description": "Premium restaurant ordering website for Jio Pizza in Noida.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
