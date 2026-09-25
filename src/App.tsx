@@ -33,8 +33,6 @@ export default function App() {
         return [...prevCart, { ...newItem, quantity: 1 }];
       }
     });
-    // Open cart for better UX, or just let the badge update. Let's just open the cart
-    setIsCartOpen(true);
   };
 
   const updateQuantity = (id: string, delta: number) => {

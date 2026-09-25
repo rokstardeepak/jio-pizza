@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Size, PizzaItem, RegularItem, CartItem } from '../types';
-import { Plus } from 'lucide-react';
+import { Plus, Check } from 'lucide-react';
 
 const FALLBACK_PIZZA = 'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80';
 const FALLBACK_FOOD = 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80';
@@ -14,6 +14,7 @@ interface PizzaCardProps {
 export function PizzaCard({ item, onAdd }: PizzaCardProps) {
   const [selectedSize, setSelectedSize] = useState<Size>('M');
   const [imgSrc, setImgSrc] = useState(item.image);
+  const [added, setAdded] = useState(false);
   const sizeDetails = item.sizes[selectedSize];
 
   const handleAdd = () => {
@@ -23,6 +24,8 @@ export function PizzaCard({ item, onAdd }: PizzaCardProps) {
       size: selectedSize,
       price: sizeDetails.price,
     });
+    setAdded(true);
+    setTimeout(() => setAdded(false), 1200);
   };
 
   return (
@@ -71,10 +74,14 @@ export function PizzaCard({ item, onAdd }: PizzaCardProps) {
           </div>
           <button
             onClick={handleAdd}
-            className="w-10 h-10 rounded-full bg-orange-600/10 text-orange-500 flex items-center justify-center hover:bg-orange-600 hover:text-white transition-all duration-300"
+            className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${
+              added
+                ? 'bg-emerald-600 text-white scale-110'
+                : 'bg-orange-600/10 text-orange-500 hover:bg-orange-600 hover:text-white'
+            }`}
             aria-label={`Add ${item.name} to cart`}
           >
-            <Plus className="w-5 h-5" />
+            {added ? <Check className="w-5 h-5" /> : <Plus className="w-5 h-5" />}
           </button>
         </div>
       </div>
@@ -90,6 +97,7 @@ interface RegularCardProps {
 
 export function RegularCard({ item, onAdd }: RegularCardProps) {
   const [imgSrc, setImgSrc] = useState(item.image);
+  const [added, setAdded] = useState(false);
 
   const handleAdd = () => {
     onAdd({
@@ -97,6 +105,8 @@ export function RegularCard({ item, onAdd }: RegularCardProps) {
       name: item.name,
       price: item.price,
     });
+    setAdded(true);
+    setTimeout(() => setAdded(false), 1200);
   };
 
   return (
@@ -132,10 +142,14 @@ export function RegularCard({ item, onAdd }: RegularCardProps) {
           </div>
           <button
             onClick={handleAdd}
-            className="w-10 h-10 rounded-full bg-orange-600/10 text-orange-500 flex items-center justify-center hover:bg-orange-600 hover:text-white transition-all duration-300"
+            className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${
+              added
+                ? 'bg-emerald-600 text-white scale-110'
+                : 'bg-orange-600/10 text-orange-500 hover:bg-orange-600 hover:text-white'
+            }`}
             aria-label={`Add ${item.name} to cart`}
           >
-            <Plus className="w-5 h-5" />
+            {added ? <Check className="w-5 h-5" /> : <Plus className="w-5 h-5" />}
           </button>
         </div>
       </div>
